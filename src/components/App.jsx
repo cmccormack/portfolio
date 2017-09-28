@@ -4,31 +4,35 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import Header from './layout/Header'
+import Footer from './layout/Footer'
+
 const App = (props) => {
-  console.log(props)
+  console.log('In App')
+  // console.log(props)
   console.log(props.children)
-  console.log(PropTypes)
+  console.log(props)
+  console.log(JSON.stringify(props.children))
+  // console.log(PropTypes)
 
 
   return (
     <div>
-      <h1>App</h1>
+      <Header />
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
+        {props.children.props.children.map(item => (
+          <li><Link to={item.props.path}>{item.props.path}</Link></li>
+        ))}
       </ul>
       {props.children}
+      <Footer />
     </div>
-
   )
 }
 
 App.propTypes = {
   children: PropTypes.element.isRequired,
+  // match: PropTypes.element.isRequired,
 }
-
-// App.defaultProps = {
-//   children: null,
-// }
 
 export default App
