@@ -8,7 +8,9 @@ import PropTypes from 'prop-types'
 import 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/js/materialize.min'
 
-import { Header } from './layout/Header'
+import '../styles/style.scss'
+import Header from './layout/Header'
+import Footer from './layout/Footer'
 
 const layout = {
   header: {
@@ -20,6 +22,7 @@ const layout = {
     //   items: [],
     //   position: 'right',
     // },
+    color: 'teal darken-1',
   },
   footer: {
     title: 'Footer',
@@ -31,18 +34,21 @@ const layout = {
       text: '© 2017 Copyright Chris McCormack',
       link: { name: 'Home', url: 'https://mackville.net' },
     },
-
+    color: 'teal darken-1',
   },
 }
 
 const App = props => (
-  <div>
+  <div id="react-body">
     <Header {...layout.header} />
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/about">About</Link></li>
-    </ul>
-    {props.children}
+    <main>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+      </ul>
+      {props.children}
+    </main>
+    <Footer {...layout.footer} />
   </div>
 
 )
