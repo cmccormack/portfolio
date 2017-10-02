@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/js/materialize.min'
 
-import Header from './layout/Header'
+import { Header } from './layout/Header'
 
 const layout = {
   header: {
@@ -50,6 +50,7 @@ const App = props => (
 
 App.propTypes = {
   children: PropTypes.element.isRequired,
+  // match: PropTypes.element.isRequired,
 }
 
 export default App
