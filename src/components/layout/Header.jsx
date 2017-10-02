@@ -17,7 +17,7 @@ class Header extends React.Component {
     const list = this.props.list
     return (
       <header>
-        <nav className="row teal darken-2">
+        <nav className={`row ${this.props.color}`}>
           <div className="nav-wrapper">
             <div className="col s12">
               <a href="#!" className={`brand-logo ${brand.position}`}>{brand.name}</a>
@@ -60,6 +60,7 @@ Header.propTypes = {
     ),
     position: PropTypes.string,
   }),
+  color: PropTypes.string,
 }
 
 Header.defaultProps = {
@@ -82,7 +83,9 @@ Header.defaultProps = {
         url: '#',
       },
     ],
-    position: 'right' },
+    position: 'right',
+  },
+  color: '',
 }
 
 export default Header
