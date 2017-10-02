@@ -26,8 +26,8 @@ const cssProd = ExtractTextPlugin.extract({
 })
 
 const environmentDependentPlugins = env =>
-  (env.production
-    ? [
+  (env.production ?
+    [
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: useProdSourceMap, // false disables source mapping set by devtool
       }),
@@ -37,8 +37,8 @@ const environmentDependentPlugins = env =>
         },
       }),
       new webpack.optimize.CommonsChunkPlugin('common.js'),
-    ]
-    : [
+    ] :
+    [
       new webpack.HotModuleReplacementPlugin(),
     ])
 
@@ -59,6 +59,9 @@ module.exports = (env = {}) => {
     },
     resolve: {
       extensions: ['*', '.js', '.jsx'],
+      alias: {
+        jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min'),
+      },
     },
     module: {
       rules: [
@@ -109,7 +112,8 @@ module.exports = (env = {}) => {
           use: 'url-loader?limit=8192&name=fonts/[name].[ext]',
         },
         {
-          test: /\.(ttf|eot)$/, use: 'file-loader?name=fonts/[name].[ext]',
+          test: /\.(ttf|eot)$/,
+          use: 'file-loader?name=fonts/[name].[ext]',
         },
       ],
     },
@@ -156,6 +160,12 @@ module.exports = (env = {}) => {
         test: /\.(js|html|css)$/,
         threshold: 10240,
         minRatio: 0.8,
+      }),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.$': 'jquery',
+        'window.jQuery': 'jquery',
       }),
     ]).concat(environmentDependentPlugins(env)),
   }
